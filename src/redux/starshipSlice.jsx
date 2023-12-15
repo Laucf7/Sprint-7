@@ -5,6 +5,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     starships: [],
     selectedStarship: null,
+    selectedStarshipImage: null,
+    
 };
 
 export const starshipSlice = createSlice({
@@ -13,25 +15,13 @@ export const starshipSlice = createSlice({
     reducers: {
         addStarships: (state, action) => {
             state.starships = action.payload.map((starship) => ({
-                name: starship.name,
-                model: starship.model,
-                manufacturer: starship.manufacturer,
-                cost_in_credits: starship.cost_in_credits,
-                length: starship.length,
-                max_atmosphering_speed: starship.max_atmosphering_speed,
-                crew: starship.crew,
-                passengers: starship.passengers,
-                cargo_capacity: starship.cargo_capacity,
-                consumables: starship.consumables,
-                hyperdrive_rating: starship.hyperdrive_rating,
-                MGLT: starship.MGLT,
-                starship_class: starship.starship_class,
-                pilots: starship.pilots,
-                films: starship.films
+                ...starship,
+                imageUrl: `https://starwars-visualguide.com/assets/img/starships/${starship.url.match(/(\d+)\/$/)[1]}.jpg`,
             }));
         },
         selectStarship: (state, action) => {
             state.selectedStarship = action.payload;
+            state.selectedStarshipImage = action.payload.imageUrl;
         },
     },
 });
