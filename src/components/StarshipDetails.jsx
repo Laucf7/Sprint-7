@@ -1,5 +1,5 @@
-
 import { useSelector } from "react-redux";
+import defaultimage from  "../assets/starship-img-not-found.jpeg"
 
 export const StarshipDetails = () => {
     const selectedStarship = useSelector((state) => state.starship.selectedStarship);
@@ -13,9 +13,10 @@ export const StarshipDetails = () => {
         <div >
             <div className="card grid grid-cols-2 gap-4 border-2 m-4">
                 <div className="col-span-1">
-                    <img src={selectedStarshipImage} alt={selectedStarship.name} className="p-1" />
+                    <img src={selectedStarshipImage} alt={selectedStarship.name} className="p-1" 
+                    onError={(e) => {e.currentTarget.src = defaultimage}}/>
                 </div>
-                <div className="col-span-1 pt-5">
+                <div className="col-span-1 py-5">
                     <h2 className="font-extrabold text-3xl">{selectedStarship.name}</h2>
                     <p><strong>Model:</strong> {selectedStarship.model}</p>
                     <p><strong>Manufacturer:</strong> {selectedStarship.manufacturer}</p>
@@ -35,3 +36,5 @@ export const StarshipDetails = () => {
         </div>
     );
 };
+
+export default StarshipDetails;
