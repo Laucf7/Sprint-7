@@ -16,7 +16,7 @@ const StarshipsList = () => {
       <ul>
         {starships.map((starship, index) => (
           <div key={index} onClick={() => handleStarshipClick(starship)}
-          className="card m-5 py-2 bg-gray-700">
+          className="card m-5 py-2 bg-neutral-900">
             <h2>
               <strong>Name:</strong> {starship.name}
             </h2>

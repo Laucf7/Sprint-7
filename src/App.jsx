@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { addStarships } from "./redux/starshipSlice";
 import StarshipsList from "./components/StarshipsList";
 import StarshipDetails from "./components/StarshipDetails.jsx";
+import Navbar from './components/Navbar.jsx';
 
 
 function App() {
@@ -53,6 +54,7 @@ useEffect(() => {
 
   return (
     <>
+      <Navbar />
       <StarshipDetails />
       <StarshipsList />
     </>

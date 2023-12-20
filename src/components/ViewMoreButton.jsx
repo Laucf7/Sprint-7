@@ -47,7 +47,7 @@ const ViewMoreButton = () => {
   return (
     <button
       onClick={handleViewMoreClick}
-      className="btn btn-active btn-accent px-4 py-2 mt-4"
+      className="btn btn-outline btn-warning px-4 py-2 mt-4"
     >
       View More
     </button>
