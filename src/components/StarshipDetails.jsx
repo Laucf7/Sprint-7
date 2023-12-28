@@ -11,7 +11,7 @@ export const StarshipDetails = () => {
 
     return (
         <div >
-            <div className="card grid grid-cols-2 gap-4 border-2 m-4">
+            <div className="card grid grid-cols-2 gap-2 border-2 m-4">
                 <div className="col-span-1">
                     <img src={selectedStarshipImage} alt={selectedStarship.name} className="p-1" 
                     onError={(e) => {e.currentTarget.src = defaultimage}}/>
