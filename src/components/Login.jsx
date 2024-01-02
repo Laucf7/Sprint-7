@@ -1,21 +1,21 @@
-import { useState } from "react"
+import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { setCurrentUser } from "../redux/authSlice";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
-    const navigate = useNavigate(); 
+function Login({ onLogin }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const initialState = {
         email: '',
         password: '',
-      };
+    };
 
     const [formData, setFormData] = useState(initialState);
 
     function handleSubmit(e) {
-        e.preventDefault()
+        e.preventDefault();
         fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'},
@@ -24,19 +24,21 @@ function Login() {
         .then(res => res.json())
         .then((data) => {
             if (data.user) {
-              // Usuario existe, iniciar sesión y redirigir
-              dispatch(setCurrentUser(data.user));
-              setFormData(initialState);
-              navigate("/");
+                // Usuario existe, iniciar sesión y redirigir
+                dispatch(setCurrentUser(data.user));
+                setFormData(initialState);
+
+                // Call the provided callback to handle navigation after login
+                onLogin();
             } else {
-              // Usuario no encontrado, mostrar mensaje de error
-              alert("El usuario no existe. Por favor, verifique sus credenciales.");
+                // Usuario no encontrado, mostrar mensaje de error
+                alert("El usuario no existe. Por favor, verifique sus credenciales.");
             }
-          });
+        });
     }
 
     function handleChange(e) {
-        setFormData({...formData, [e.target.name] : e.target.value})
+        setFormData({...formData, [e.target.name] : e.target.value});
     }
 
     return (
@@ -48,7 +50,7 @@ function Login() {
                 <button className='login-btn m-2 mx-24 btn btn-outline btn-warning' type='submit'>Login</button>
             </form>
         </div>
-    )
+    );
 }
 
-export default Login
+export default Login;
